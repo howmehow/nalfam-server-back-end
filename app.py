@@ -12,6 +12,9 @@ for device in devices:
 jason = json.dumps(devices, indent=2)
 # print(devices)
 print(jason)
+#TODO add jason to sql 
+
+
 # packages=json.loads(data)
 # time = datetime.now()
 # for package in packages:
