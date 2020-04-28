@@ -1,23 +1,7 @@
-import requests
-import json
-import datetime
-import random
-response = requests.get('http://localhost:5000/devices/')
-devices = response.json()
-# packages = json.dumps(data, indent=2)
-for device in devices:
-    device['timeStamp'] = str(datetime.datetime.now()).split('.')[0]
-    device['upload'] = random.getrandbits(10)
-    device['download'] = random.getrandbits(20)
-jason = json.dumps(devices, indent=2)
-# print(devices)
-print(jason)
-#TODO add jason to sql 
+from utils.app_factory import create_app
 
+if __name__ == '__main__' : 
+    app = create_app()
+    print(app.url_map)
+    app.run(port=5001, debug = True)
 
-# packages=json.loads(data)
-# time = datetime.now()
-# for package in packages:
-#     package["TimeStamp"] = time
-
-# print(packages)
