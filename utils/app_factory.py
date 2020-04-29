@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-from controllers.static_data_controller import static_data_blueprint
+from controllers.data_controller import data_blueprint
 from controllers.refresh_controller import refresh_blueprint
 from utils.db import db
 
@@ -12,7 +12,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
-    app.register_blueprint(static_data_blueprint, url_prefix='/static-data')
+    app.register_blueprint(data_blueprint, url_prefix='/')
     app.register_blueprint(refresh_blueprint, url_prefix='/refresh')
 
     return app

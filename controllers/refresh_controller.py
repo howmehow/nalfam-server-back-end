@@ -21,17 +21,19 @@ def get_shit_done():
         upload = device.pop("upload_speed")
         download = device.pop("download_speed")
 
-        # StaticData.query.all()
-        # if device["mac_address"] == 
-        static_data = StaticData(**device)
-        db.session.add(static_data)
-        db.session.commit()
 
-        snapshot = {"static_data_id":static_data.id, "time_stamp": datetime.now(), "active_connection":active, "upload_speed":upload, "download_speed":download}
+        found_device = db.session.query(StaticData).filter_by(mac_address=device["mac_address"]).first()
+        if found_device:
+            static_data_id = found_device.id
+        else:
+            new_device = StaticData(**device)
+            db.session.add(new_device)
+            db.session.commit()
+            static_data_id = new_device.id
+
+        snapshot = {"static_data_id":static_data_id, "time_stamp": datetime.now(), "active_connection":active, "upload_speed":upload, "download_speed":download}
         dynamic_data = DynamicData(**snapshot)
         db.session.add(dynamic_data)
         db.session.commit()
 
-    
-    
     return jsonify({"Shit got": "done"})
