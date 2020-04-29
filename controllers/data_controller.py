@@ -10,6 +10,6 @@ data_blueprint = Blueprint('data_blueprint', __name__)
 def get_presentation_data():
     devices = StaticData.query.all()
     
-    result = static_data_schema.dumps(devices).data
+    result = static_data_schema.dumps(devices)
     response = Response(result, status=200, mimetype='application/json')
     return response

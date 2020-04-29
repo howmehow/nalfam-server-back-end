@@ -10,7 +10,7 @@ requests = "*"
 flask = "*"
 flask-sqlalchemy = "*"
 flask-marshmallow = "*"
-marshmallow-sqlalchemy = "*"
+schedule = "*"
 
 [requires]
 python_version = "3.7"
